@@ -16,17 +16,19 @@ import java.sql.SQLException;
  */
 public class LogInDB {
     
-    private  boolean credencialesCorrectas = false;
-
     public boolean validarLogIn(Usuario user){
+        boolean credencialesCorrectas = false;
         Connection connection = BDconnectionSingleton.getInstance().getConnection();
         String sql = "SELECT COUNT(email) FROM usuario WHERE email = ? AND password = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setString(1, user.getEmail());
             ps.setString(2, user.getPassword());
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                credencialesCorrectas = true;
+            if (rs.next()) {
+                int count = rs.getInt(1); 
+                if (count > 0){
+                    credencialesCorrectas = true;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

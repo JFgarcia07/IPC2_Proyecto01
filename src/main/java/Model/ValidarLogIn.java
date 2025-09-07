@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
  * @author jgarcia07
  */
 public class ValidarLogIn {
+    
     private Usuario extraerDatos(HttpServletRequest request) throws UserDataInvalidException {
         try {
             String email = request.getParameter("inputEmail");

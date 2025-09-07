@@ -39,7 +39,7 @@ public class LogInRequest extends HttpServlet {
                response.sendRedirect(request.getContextPath() + "/MenuPrincipal.jsp");
             } else {
                 request.setAttribute("error", "Credenciales inválidas, intenta de nuevo.");
-                request.getRequestDispatcher("/IPC2_Proyecto01/LogIn.jsp").forward(request, response);
+                request.getRequestDispatcher("").forward(request, response);
             }
         } catch (UserDataInvalidException e) {
             request.setAttribute("error", e.getMessage());
