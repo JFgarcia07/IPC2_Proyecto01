@@ -19,11 +19,39 @@
     <center>
         <h1>Gestor de Usuarios</h1>
     </center>
-
-
+        <div>
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <span>Lista de Usuarios</span>
+                    <button class="btn btn-light btn-sm">
+                        <i class="bi bi-plus-circle"></i> Nuevo
+                    </button>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Id Personal</th>
+                                <th>Rol</th>
+                                <th>Email</th>
+                                <th>Nombre de Usuario</th>
+                                <th>Organizacion Procedencia</th>
+                                <th>Numero Telefonico</th>
+                                <th>Estado</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%--LLENAR CON INFO--%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
     <script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script>
-    <div>
-        <jsp:include page="/Includes/Footer.jsp"/>
-    </div> 
-</body>
+        <div>
+            <jsp:include page="/Includes/Footer.jsp"/>
+        </div> 
+    </body>
 </html>
