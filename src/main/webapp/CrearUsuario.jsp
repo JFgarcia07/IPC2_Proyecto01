@@ -29,7 +29,7 @@
                         <br>
                         <label for="opciones">Rol del Usuario:</label>
                         <select id="opcionesRol" name="opcionesRol">
-                            <option value="1">Administrador de Usuario</option>
+                            <option value="1">Administrador de Sistema</option>
                             <option value="2">Administrador de Congreso</option>
                             <option value="3">Usuario Basico</option>
                         </select>

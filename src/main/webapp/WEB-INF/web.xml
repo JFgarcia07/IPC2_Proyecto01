@@ -8,6 +8,10 @@
         <servlet-name>UsuarioServlet</servlet-name>
         <servlet-class>Controller.UsuarioServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditarUsuarioServlet</servlet-name>
+        <servlet-class>Controller.EditarUsuarioServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>OpcionRequest</servlet-name>
         <url-pattern>/OpcionRequest</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>UsuarioServlet</servlet-name>
         <url-pattern>/UsuarioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarUsuarioServlet</servlet-name>
+        <url-pattern>/EditarUsuarioServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
