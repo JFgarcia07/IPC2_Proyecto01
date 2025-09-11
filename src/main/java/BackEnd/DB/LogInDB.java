@@ -20,7 +20,7 @@ public class LogInDB {
     public boolean validarLogIn(Usuario user){
         boolean credencialesCorrectas = false;
         Connection connection = BDconnectionSingleton.getInstance().getConnection();
-        String sql = "SELECT COUNT(email) FROM usuario WHERE email = ? AND password = ?";
+        String sql = "SELECT COUNT(email) FROM usuario WHERE email = ? AND password = ? and activo = 1";
         try (PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setString(1, user.getEmail());
             ps.setString(2, user.getPassword());

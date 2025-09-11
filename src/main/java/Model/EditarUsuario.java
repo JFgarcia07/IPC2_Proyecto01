@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
  */
 public class EditarUsuario {
     
-    private UsuariosDB userDB = new UsuariosDB();
+    private final UsuariosDB userDB = new UsuariosDB();
     
     public Usuario actualizarUsuario(HttpServletRequest request) throws UserDataInvalidException,
             EntityNotFoundException {
