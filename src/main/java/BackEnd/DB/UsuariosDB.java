@@ -18,19 +18,21 @@ import java.util.Optional;
  * @author jgarcia07
  */
 public class UsuariosDB {
+
     private final String QUERY_USUARIOS_TODOS = "SELECT * FROM usuario";
     private final String QUERY_BUSCAR_USUARIO_POR_ID = "SELECT COUNT(id_personal) FROM usuario WHERE id_personal = ?";
     private final String QUERY_ENCONTRAR_USUARIO_POR_ID = "SELECT * FROM usuario WHERE id_personal = ?";
     private final String QUERY_CREAR_USUARIO = "INSERT INTO usuario (id_personal, id_rol, email, nombre_usuario, password, oranizacion_procedencia, num_telefono, activo, cartera_digital) VALUES (?,?,?,?,?,?,?,?,?)";
     private final String QUERY_ID_ROL = "SELECT (id_rol) FROM rol WHERE nombre_rol = ?";
-    private final String QUERY_EDITAR_USUARIO = "UPDATE usuario SET id_rol = ?, email = ?, password = ?, nombre_usuario = ?, oranizacion_procedencia = ?, num_telefono = ? WHERE id_personal = ?";
+    private final String QUERY_EDITAR_USUARIO = "UPDATE usuario SET id_rol = ?, email = ?, password = ?, nombre_usuario = ?, oranizacion_procedencia = ?, num_telefono = ?, activo = ? WHERE id_personal = ?";
+    private final String QUERY_DESACTIVAR_USUARIO = "UPDATE usuario SET activo = ? WHERE id_personal = ?";
     
-    public List<Usuario> listaUsuarios(){
+    public List<Usuario> listaUsuarios() {
         List<Usuario> usuarios = new ArrayList<>();
         Connection conn = BDconnectionSingleton.getInstance().getConnection();
-        try (PreparedStatement ps = conn.prepareStatement(QUERY_USUARIOS_TODOS)){
+        try (PreparedStatement ps = conn.prepareStatement(QUERY_USUARIOS_TODOS)) {
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 String idPersonal = rs.getString("id_personal");
                 String idRol = rs.getString("id_rol");
                 String email = rs.getString("email");
@@ -40,9 +42,9 @@ public class UsuariosDB {
                 boolean estado = rs.getBoolean("activo");
                 String numTelefono = rs.getString("num_telefono");
                 double cartera = rs.getDouble("cartera_digital");
-                
-                Usuario user = new Usuario(idPersonal, idRol, email,password, nombreUser, orgProcedencia, estado, numTelefono, cartera);
-                
+
+                Usuario user = new Usuario(idPersonal, idRol, email, password, nombreUser, orgProcedencia, estado, numTelefono, cartera);
+
                 usuarios.add(user);
             }
         } catch (SQLException e) {
@@ -50,15 +52,15 @@ public class UsuariosDB {
         }
         return usuarios;
     }
-    
-    public boolean existeUsuario(String idPersonal){
+
+    public boolean existeUsuario(String idPersonal) {
         Connection conn = BDconnectionSingleton.getInstance().getConnection();
-        try (PreparedStatement ps = conn.prepareStatement(QUERY_BUSCAR_USUARIO_POR_ID)){
+        try (PreparedStatement ps = conn.prepareStatement(QUERY_BUSCAR_USUARIO_POR_ID)) {
             ps.setString(1, idPersonal);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                int count = rs.getInt(1); 
-                return count > 0;     
+                int count = rs.getInt(1);
+                return count > 0;
             }
         } catch (Exception e) {
             System.err.println("Error al crear usuario: " + e.getMessage());
@@ -66,12 +68,12 @@ public class UsuariosDB {
         }
         return false;
     }
-    
+
     public String obtenerIdRol(String valorOpcion) {
         Connection conn = BDconnectionSingleton.getInstance().getConnection();
         String idRol = "";
         String nombreRol = "";
-        
+
         switch (valorOpcion) {
             case "1":
                 nombreRol = "ADMINISTRADOR SISTEMA";
@@ -83,7 +85,7 @@ public class UsuariosDB {
                 nombreRol = "USUARIO BASICO";
                 break;
         }
-        
+
         try (PreparedStatement ps = conn.prepareStatement(QUERY_ID_ROL)) {
             ps.setString(1, nombreRol);
             ResultSet rs = ps.executeQuery();
@@ -96,11 +98,10 @@ public class UsuariosDB {
         }
         return idRol;
     }
-    
-    
-    public void crearUsuarioDB(Usuario usuario){
+
+    public void crearUsuarioDB(Usuario usuario) {
         Connection conn = BDconnectionSingleton.getInstance().getConnection();
-        try (PreparedStatement ps = conn.prepareStatement(QUERY_CREAR_USUARIO)){
+        try (PreparedStatement ps = conn.prepareStatement(QUERY_CREAR_USUARIO)) {
             ps.setString(1, usuario.getIdPersonal());
             ps.setString(2, usuario.getIdRol());
             ps.setString(3, usuario.getEmail());
@@ -116,13 +117,13 @@ public class UsuariosDB {
             e.printStackTrace();
         }
     }
-    
-    public Optional<Usuario> obtenerUsuarioPorId(String idPersonal){
+
+    public Optional<Usuario> obtenerUsuarioPorId(String idPersonal) {
         Connection conn = BDconnectionSingleton.getInstance().getConnection();
-        try (PreparedStatement ps = conn.prepareStatement(QUERY_ENCONTRAR_USUARIO_POR_ID)){
+        try (PreparedStatement ps = conn.prepareStatement(QUERY_ENCONTRAR_USUARIO_POR_ID)) {
             ps.setString(1, idPersonal);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){            
+            if (rs.next()) {
                 Usuario user = new Usuario();
                 user.setIdPersonal(idPersonal);
                 user.setIdRol(rs.getString("id_rol"));
@@ -132,33 +133,45 @@ public class UsuariosDB {
                 user.setOrganizacionProcedencia(rs.getString("oranizacion_procedencia"));
                 user.setNumTelefono(rs.getString("num_telefono"));
                 user.setActivo(rs.getBoolean("activo"));
-                
+
                 return Optional.of(user);
             }
-            
+
         } catch (Exception e) {
             System.err.println("Error al obtener usuario: " + e.getMessage());
             e.printStackTrace();
         }
-        
+
         return Optional.empty();
     }
-   
-    
-   public void editarUsuario(Usuario usuario) {
-    Connection conn = BDconnectionSingleton.getInstance().getConnection();
-    try (PreparedStatement ps = conn.prepareStatement(QUERY_EDITAR_USUARIO)) {
-        ps.setString(1, usuario.getIdRol());                   
-        ps.setString(2, usuario.getEmail());                   
-        ps.setString(3, usuario.getPassword());     
-        ps.setString(4, usuario.getNombreUsuario());
-        ps.setString(5, usuario.getOrganizacionProcedencia()); 
-        ps.setString(6, usuario.getNumTelefono());             
-        ps.setString(7, usuario.getIdPersonal());         
-        ps.executeUpdate();
-    } catch (SQLException e) {
-        System.err.println("Error al editar usuario: " + e.getMessage());
-        e.printStackTrace();
+
+    public void editarUsuario(Usuario usuario) {
+        Connection conn = BDconnectionSingleton.getInstance().getConnection();
+        try (PreparedStatement ps = conn.prepareStatement(QUERY_EDITAR_USUARIO)) {
+            ps.setString(1, usuario.getIdRol());
+            ps.setString(2, usuario.getEmail());
+            ps.setString(3, usuario.getPassword());
+            ps.setString(4, usuario.getNombreUsuario());
+            ps.setString(5, usuario.getOrganizacionProcedencia());
+            ps.setString(6, usuario.getNumTelefono());
+            ps.setBoolean(7, usuario.isActivo());
+            ps.setString(8, usuario.getIdPersonal());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error al editar usuario: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
-}
+    
+    public void desactivarUsuario(Usuario usuario){
+        Connection conn = BDconnectionSingleton.getInstance().getConnection();
+        try (PreparedStatement ps = conn.prepareStatement(QUERY_DESACTIVAR_USUARIO)){
+            ps.setBoolean(1, usuario.isActivo());
+            ps.setString(2, usuario.getIdPersonal());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error al desactivar usuario: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }

@@ -12,6 +12,10 @@
         <servlet-name>EditarUsuarioServlet</servlet-name>
         <servlet-class>Controller.EditarUsuarioServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DesactivarUsuarioServlet</servlet-name>
+        <servlet-class>Controller.DesactivarUsuarioServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>OpcionRequest</servlet-name>
         <url-pattern>/OpcionRequest</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>EditarUsuarioServlet</servlet-name>
         <url-pattern>/EditarUsuarioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DesactivarUsuarioServlet</servlet-name>
+        <url-pattern>/DesactivarUsuarioServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

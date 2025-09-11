@@ -54,7 +54,7 @@
                                     <td>${usuario.activo}</td>
                                     <td>
                                         <a href="${pageContext.servletContext.contextPath}/EditarUsuarioServlet?id=${usuario.idPersonal}" class="btn btn-sm btn-warning">Editar</a>
-                                        <button class="btn btn-sm btn-danger">Desactivar</button>
+                                        <a href="${pageContext.servletContext.contextPath}/DesactivarUsuarioServlet?id=${usuario.idPersonal}" class="btn btn-sm btn-danger">Desactivar</a>
                                     </td>
                                 </tr>
                             </c:forEach>

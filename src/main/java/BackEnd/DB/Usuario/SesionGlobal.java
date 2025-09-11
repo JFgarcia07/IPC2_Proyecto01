@@ -10,4 +10,5 @@ package BackEnd.DB.Usuario;
  */
 public class SesionGlobal {
     public static String idRol;
+    public static boolean activo;
 }
