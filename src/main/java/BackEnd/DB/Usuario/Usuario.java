@@ -19,7 +19,7 @@ public class Usuario {
     private String organizacionProcedencia;
     private boolean activo;
     private String numTelefono;
-    private double cartera;
+    private double cartera = 0;
 
 
     public Usuario() {
@@ -111,7 +111,7 @@ public class Usuario {
 
     public boolean esValido(){
         return StringUtils.isNotBlank(idPersonal) && StringUtils.isNotBlank(idRol) && StringUtils.isNotBlank(email)
-                && StringUtils.isNotBlank(nombreUsuario) && StringUtils.isNotBlank(organizacionProcedencia) &&
+                && StringUtils.isNotBlank(password) && StringUtils.isNotBlank(nombreUsuario) && StringUtils.isNotBlank(organizacionProcedencia) &&
                 StringUtils.isNotBlank(numTelefono);
     }
 }

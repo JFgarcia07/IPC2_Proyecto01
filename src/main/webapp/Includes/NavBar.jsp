@@ -13,7 +13,9 @@
             </li> 
             <li class="nav-item"><a href="#" class="nav-link">Usuarios</a></li> 
             <li class="nav-item"><a href="#" class="nav-link">Eventos</a></li> 
-            <li class="nav-item"><a href="${pageContext.request.contextPath}/GestorUsuarios.jsp" class="nav-link">Gestor de Usuarios</a></li> 
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/IrGestorUsuarios" class="nav-link">Gestor de Usuarios</a>
+            </li>
             <li class="nav-item"><a href="#" class="nav-link">Perfil</a></li>
             <li class="nav-item"><a href="#" class="nav-link">About</a></li>
         </ul> 
