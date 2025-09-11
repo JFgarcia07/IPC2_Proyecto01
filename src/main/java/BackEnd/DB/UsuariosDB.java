@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -19,9 +20,10 @@ import java.util.List;
 public class UsuariosDB {
     private final String QUERY_USUARIOS_TODOS = "SELECT * FROM usuario";
     private final String QUERY_BUSCAR_USUARIO_POR_ID = "SELECT COUNT(id_personal) FROM usuario WHERE id_personal = ?";
+    private final String QUERY_ENCONTRAR_USUARIO_POR_ID = "SELECT * FROM usuario WHERE id_personal = ?";
     private final String QUERY_CREAR_USUARIO = "INSERT INTO usuario (id_personal, id_rol, email, nombre_usuario, password, oranizacion_procedencia, num_telefono, activo, cartera_digital) VALUES (?,?,?,?,?,?,?,?,?)";
     private final String QUERY_ID_ROL = "SELECT (id_rol) FROM rol WHERE nombre_rol = ?";
-    
+    private final String QUERY_EDITAR_USUARIO = "UPDATE usuario SET id_rol = ?, email = ?, password = ?, nombre_usuario = ?, oranizacion_procedencia = ?, num_telefono = ? WHERE id_personal = ?";
     
     public List<Usuario> listaUsuarios(){
         List<Usuario> usuarios = new ArrayList<>();
@@ -95,6 +97,7 @@ public class UsuariosDB {
         return idRol;
     }
     
+    
     public void crearUsuarioDB(Usuario usuario){
         Connection conn = BDconnectionSingleton.getInstance().getConnection();
         try (PreparedStatement ps = conn.prepareStatement(QUERY_CREAR_USUARIO)){
@@ -113,5 +116,49 @@ public class UsuariosDB {
             e.printStackTrace();
         }
     }
+    
+    public Optional<Usuario> obtenerUsuarioPorId(String idPersonal){
+        Connection conn = BDconnectionSingleton.getInstance().getConnection();
+        try (PreparedStatement ps = conn.prepareStatement(QUERY_ENCONTRAR_USUARIO_POR_ID)){
+            ps.setString(1, idPersonal);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){            
+                Usuario user = new Usuario();
+                user.setIdPersonal(idPersonal);
+                user.setIdRol(rs.getString("id_rol"));
+                user.setEmail(rs.getString("email"));
+                user.setNombreUsuario(rs.getString("nombre_usuario"));
+                user.setPassword(rs.getString("password"));
+                user.setOrganizacionProcedencia(rs.getString("oranizacion_procedencia"));
+                user.setNumTelefono(rs.getString("num_telefono"));
+                user.setActivo(rs.getBoolean("activo"));
+                
+                return Optional.of(user);
+            }
+            
+        } catch (Exception e) {
+            System.err.println("Error al obtener usuario: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return Optional.empty();
+    }
+   
+    
+   public void editarUsuario(Usuario usuario) {
+    Connection conn = BDconnectionSingleton.getInstance().getConnection();
+    try (PreparedStatement ps = conn.prepareStatement(QUERY_EDITAR_USUARIO)) {
+        ps.setString(1, usuario.getIdRol());                   
+        ps.setString(2, usuario.getEmail());                   
+        ps.setString(3, usuario.getPassword());     
+        ps.setString(4, usuario.getNombreUsuario());
+        ps.setString(5, usuario.getOrganizacionProcedencia()); 
+        ps.setString(6, usuario.getNumTelefono());             
+        ps.setString(7, usuario.getIdPersonal());         
+        ps.executeUpdate();
+    } catch (SQLException e) {
+        System.err.println("Error al editar usuario: " + e.getMessage());
+        e.printStackTrace();
+    }
 }
-
+}

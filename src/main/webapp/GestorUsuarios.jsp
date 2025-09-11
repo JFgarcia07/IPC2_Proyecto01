@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 </head>
 <body>
-    <jsp:include page="/Includes/NavBar.jsp" />
+    <jsp:include page="/Includes/NavBar.jsp"/>
 
     <div class="container mt-5">
         <h1 class="text-center mb-4">Gestor de Usuarios</h1>
@@ -53,8 +53,7 @@
                                     <td>${usuario.cartera}</td>
                                     <td>${usuario.activo}</td>
                                     <td>
-                                        <button class="btn btn-sm btn-warning">Editar</button>
-                                        <br>
+                                        <a href="${pageContext.servletContext.contextPath}/EditarUsuarioServlet?id=${usuario.idPersonal}" class="btn btn-sm btn-warning">Editar</a>
                                         <button class="btn btn-sm btn-danger">Desactivar</button>
                                     </td>
                                 </tr>

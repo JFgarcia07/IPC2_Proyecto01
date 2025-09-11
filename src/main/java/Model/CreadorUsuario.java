@@ -24,7 +24,6 @@ public class CreadorUsuario {
         Usuario usuario = extraer(request);
         
         if(userDB.existeUsuario(usuario.getIdPersonal())){
-            System.out.println("EXISTE");
             throw new EntityAlreadyExistsException(String.format("El usuario ya existe en el registro", usuario.getIdPersonal()));
         }
         
@@ -32,7 +31,6 @@ public class CreadorUsuario {
         
         return usuario;
     }
-    
     
     private Usuario extraer(HttpServletRequest request) throws UserDataInvalidException {
         try {
@@ -54,7 +52,7 @@ public class CreadorUsuario {
             throw new UserDataInvalidException("Error en los datos enviados");
         }
     }
-    
+     
     private boolean obtenerEstado(String activoString){
         return activoString.equalsIgnoreCase("Activo");
     }
