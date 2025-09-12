@@ -16,6 +16,10 @@
         <servlet-name>DesactivarUsuarioServlet</servlet-name>
         <servlet-class>Controller.DesactivarUsuarioServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CrearCuentaServlet</servlet-name>
+        <servlet-class>Controller.CrearCuentaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>OpcionRequest</servlet-name>
         <url-pattern>/OpcionRequest</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>DesactivarUsuarioServlet</servlet-name>
         <url-pattern>/DesactivarUsuarioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CrearCuentaServlet</servlet-name>
+        <url-pattern>/CrearCuentaServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

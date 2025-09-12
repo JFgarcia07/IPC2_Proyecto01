@@ -4,23 +4,25 @@
  */
 package Controller;
 
-import BackEnd.DB.Usuario.SesionGlobal;
+import BackEnd.DB.Usuario.Usuario;
+import Exception.EntityAlreadyExistsException;
 import Exception.UserDataInvalidException;
-import Model.ValidarLogIn;
+import Model.CreadorUsuario;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author jgarcia07
  */
-@WebServlet(name = "logInRequest", urlPatterns = {"/logInRequest"})
-public class LogInRequest extends HttpServlet {
+@WebServlet(name = "CrearCuentaServlet", urlPatterns = {"/CrearCuentaServlet"})
+public class CrearCuentaServlet extends HttpServlet {
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -32,20 +34,16 @@ public class LogInRequest extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CreadorUsuario creador = new CreadorUsuario();
         try {
-            ValidarLogIn logIn = new ValidarLogIn();
-            if (logIn.validarCredenciales(request)) {
-                HttpSession session = request.getSession();
-                session.setAttribute("idRole", SesionGlobal.idRol);
-                request.getRequestDispatcher("/MenuPrincipal.jsp").forward(request, response);
-            }
-             else {
-                request.setAttribute("error", "Credenciales inválidas, intenta de nuevo.");
-                request.getRequestDispatcher("/Login.jsp").forward(request, response);
-            }
-        } catch (UserDataInvalidException e) {
-            request.setAttribute("error", e.getMessage());
-            request.getRequestDispatcher("/Login.jsp").forward(request, response);
+           Usuario usuarioCreado = creador.crearUsuario(request);
+           request.setAttribute("Usuario Creado", usuarioCreado); 
+        } catch (UserDataInvalidException | EntityAlreadyExistsException e) {
+           request.setAttribute("error", e.getMessage());
         }
+        
+        response.sendRedirect("LogIn.jsp");
+
     }
+
 }

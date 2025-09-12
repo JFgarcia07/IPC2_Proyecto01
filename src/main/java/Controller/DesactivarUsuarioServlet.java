@@ -40,7 +40,7 @@ public class DesactivarUsuarioServlet extends HttpServlet {
             
             Usuario usuario = desactivador.desactivarUsuario(idPersonal);
             request.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath() + "/IrGestorUsuarios");
+            response.sendRedirect(request.getContextPath() + "/Usuarios-pages/IrGestorUsuarios");
         } catch (UserDataInvalidException ex) {
             request.setAttribute("error", ex.getMessage());
         }

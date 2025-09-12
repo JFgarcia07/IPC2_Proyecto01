@@ -41,7 +41,7 @@ public class IrGestorUsuarios extends HttpServlet {
             List<Usuario> usuariosList = usuariosDB.listaUsuarios();
             request.setAttribute("usuarios", usuariosList);
             
-            request.getRequestDispatcher("/GestorUsuarios.jsp").forward(request, response);
+            request.getRequestDispatcher("/Usuarios-pages/GestorUsuarios.jsp").forward(request, response);
             
         } else {
             request.getRequestDispatcher("/SinAcceso.jsp").forward(request, response);
