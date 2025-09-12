@@ -17,6 +17,13 @@
     <jsp:include page="/Includes/NavBar.jsp"/>
 
     <div class="container mt-5">
+
+        <c:if test="${not empty error}">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error:</strong> ${error}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </c:if>
         <h1 class="text-center mb-4">Gestor de Usuarios</h1>
 
         <div class="card shadow-sm">
