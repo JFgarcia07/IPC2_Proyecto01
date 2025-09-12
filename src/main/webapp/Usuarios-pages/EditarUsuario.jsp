@@ -17,7 +17,7 @@
 
         <div class="container mt-5">
             <div class="mb-3">
-                <a href="IrGestorUsuarios" class="btn btn-secondary" style="background-color: #005cbf">
+                <a href="${pageContext.request.contextPath}/IrGestorUsuarios" class="btn btn-secondary" style="background-color: #005cbf">
                     <- Regresar
                 </a>
             </div>

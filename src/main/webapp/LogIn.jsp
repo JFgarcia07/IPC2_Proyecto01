@@ -23,6 +23,9 @@
                         <input type="password" name="inputPassword" class="form-control mt-2" placeholder="Ingresar contraseña" required>
                         <br>
                         <input type="submit" class="btn btn-primary btn-block mt-2" name="btnLogIn" value="Iniciar Sesion">
+                        <a href="${pageContext.request.contextPath}/Usuarios-pages/CrearCuenta.jsp" class="btn btn-primary btn-block mt-2" style="background-color: #005cbf">
+                            Crear Cuenta
+                        </a>
                     </div>
                 </div>
             </form>

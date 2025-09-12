@@ -29,7 +29,7 @@
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                 <span>Lista de Usuarios</span>
-                <a href="CrearUsuario.jsp" class="btn btn-light btn-sm">
+                <a href="Usuarios-pages/CrearUsuario.jsp" class="btn btn-light btn-sm">
                     <i class="bi bi-plus-circle"> + Crear Nuevo Usario</i> 
                 </a>
             </div>

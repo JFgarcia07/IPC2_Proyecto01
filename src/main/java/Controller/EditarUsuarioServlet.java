@@ -45,7 +45,7 @@ public class EditarUsuarioServlet extends HttpServlet {
             Usuario usuario = consultaUser.obtenerUsuarioPorId(idUsuario);
             
             request.setAttribute("usuario", usuario);
-            request.getRequestDispatcher("/EditarUsuario.jsp").forward(request, response);
+            request.getRequestDispatcher("/Usuarios-pages/EditarUsuario.jsp").forward(request, response);
             
         } catch (EntityNotFoundException ex) {
             request.setAttribute("error", ex.getMessage());
