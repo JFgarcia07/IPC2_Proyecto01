@@ -46,6 +46,10 @@ public class CreadorUsuario {
             
             Usuario usuario = new Usuario(idPersonal,idRol,email,password,nombreUsuario,organizacion,activo, numTelefono, cartera);
             
+             if (!usuario.esValido()) {
+                throw new UserDataInvalidException("Error en los datos enviados");
+            }
+            
             return usuario;
             
         } catch (IllegalArgumentException | NullPointerException e) {

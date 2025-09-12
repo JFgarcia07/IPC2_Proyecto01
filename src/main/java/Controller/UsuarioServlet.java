@@ -43,8 +43,7 @@ public class UsuarioServlet extends HttpServlet {
             request.setAttribute("error", e.getMessage());
         }
         
-        RequestDispatcher dispatcher = getServletContext()
-                .getRequestDispatcher("/IrGestorUsuarios");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/IrGestorUsuarios");
         dispatcher.forward(request, response);
 
     }

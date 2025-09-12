@@ -5,6 +5,7 @@
 package BackEnd.DB;
 
 import BackEnd.DB.Usuario.Usuario;
+import static Model.EncriptarPassword.encriptar;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -106,7 +107,7 @@ public class UsuariosDB {
             ps.setString(2, usuario.getIdRol());
             ps.setString(3, usuario.getEmail());
             ps.setString(4, usuario.getNombreUsuario());
-            ps.setString(5, usuario.getPassword());
+            ps.setString(5, encriptar(usuario.getPassword()));
             ps.setString(6, usuario.getOrganizacionProcedencia());
             ps.setString(7, usuario.getNumTelefono());
             ps.setBoolean(8, usuario.isActivo());
@@ -129,7 +130,6 @@ public class UsuariosDB {
                 user.setIdRol(rs.getString("id_rol"));
                 user.setEmail(rs.getString("email"));
                 user.setNombreUsuario(rs.getString("nombre_usuario"));
-                user.setPassword(rs.getString("password"));
                 user.setOrganizacionProcedencia(rs.getString("oranizacion_procedencia"));
                 user.setNumTelefono(rs.getString("num_telefono"));
                 user.setActivo(rs.getBoolean("activo"));
