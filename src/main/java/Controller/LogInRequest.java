@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import BackEnd.DB.Usuario.SesionGlobal;
+import BackEnd.DB.SesionGlobal;
 import Exception.UserDataInvalidException;
 import Model.ValidarLogIn;
 import java.io.IOException;
@@ -41,11 +41,11 @@ public class LogInRequest extends HttpServlet {
             }
              else {
                 request.setAttribute("error", "Credenciales inválidas, intenta de nuevo.");
-                request.getRequestDispatcher("/Login.jsp").forward(request, response);
+                request.getRequestDispatcher("/LogIn.jsp").forward(request, response);
             }
         } catch (UserDataInvalidException e) {
             request.setAttribute("error", e.getMessage());
-            request.getRequestDispatcher("/Login.jsp").forward(request, response);
+            request.getRequestDispatcher("/LogIn.jsp").forward(request, response);
         }
     }
 }

@@ -8,7 +8,6 @@ import BackEnd.DB.Usuario.Usuario;
 import Exception.EntityAlreadyExistsException;
 import Exception.UserDataInvalidException;
 import Model.CreadorUsuario;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

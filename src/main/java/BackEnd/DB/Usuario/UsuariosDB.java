@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package BackEnd.DB;
+package BackEnd.DB.Usuario;
 
-import BackEnd.DB.Usuario.Usuario;
+import BackEnd.DB.BDconnectionSingleton;
 import static Model.EncriptarPassword.encriptar;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -63,7 +63,7 @@ public class UsuariosDB {
                 int count = rs.getInt(1);
                 return count > 0;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println("Error al crear usuario: " + e.getMessage());
             e.printStackTrace();
         }

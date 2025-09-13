@@ -5,7 +5,7 @@
 package Model;
 
 import BackEnd.DB.Usuario.Usuario;
-import BackEnd.DB.UsuariosDB;
+import BackEnd.DB.Usuario.UsuariosDB;
 import Exception.EntityNotFoundException;
 import Exception.UserDataInvalidException;
 import jakarta.servlet.http.HttpServletRequest;
