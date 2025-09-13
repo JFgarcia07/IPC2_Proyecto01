@@ -5,7 +5,7 @@
 package Model;
 
 import BackEnd.DB.Usuario.Usuario;
-import BackEnd.DB.UsuariosDB;
+import BackEnd.DB.Usuario.UsuariosDB;
 import Exception.EntityAlreadyExistsException;
 import Exception.UserDataInvalidException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
  */
 public class CreadorUsuario {
     
-    private UsuariosDB userDB = new UsuariosDB();
+    private final UsuariosDB userDB = new UsuariosDB();
     
     public Usuario crearUsuario(HttpServletRequest request) throws UserDataInvalidException,
         EntityAlreadyExistsException {
@@ -46,7 +46,7 @@ public class CreadorUsuario {
             
             Usuario usuario = new Usuario(idPersonal,idRol,email,password,nombreUsuario,organizacion,activo, numTelefono, cartera);
             
-             if (!usuario.esValido()) {
+            if (!usuario.esValido()) {
                 throw new UserDataInvalidException("Error en los datos enviados");
             }
             

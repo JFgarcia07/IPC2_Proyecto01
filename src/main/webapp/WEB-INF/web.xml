@@ -20,6 +20,18 @@
         <servlet-name>CrearCuentaServlet</servlet-name>
         <servlet-class>Controller.CrearCuentaServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>IrGestorConvocatorias</servlet-name>
+        <servlet-class>Controller.Convocatorias.IrGestorConvocatorias</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CrearConvocatoriaServlet</servlet-name>
+        <servlet-class>Controller.Convocatorias.CrearConvocatoriaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IrListadoConvocatorias</servlet-name>
+        <servlet-class>Controller.Convocatorias.IrListadoConvocatorias</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>OpcionRequest</servlet-name>
         <url-pattern>/OpcionRequest</url-pattern>
@@ -39,6 +51,18 @@
     <servlet-mapping>
         <servlet-name>CrearCuentaServlet</servlet-name>
         <url-pattern>/CrearCuentaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IrGestorConvocatorias</servlet-name>
+        <url-pattern>/IrGestorConvocatorias</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CrearConvocatoriaServlet</servlet-name>
+        <url-pattern>/CrearConvocatoriaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IrListadoConvocatorias</servlet-name>
+        <url-pattern>/IrListadoConvocatorias</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,7 +5,7 @@
 package Model;
 
 import BackEnd.DB.Usuario.Usuario;
-import BackEnd.DB.UsuariosDB;
+import BackEnd.DB.Usuario.UsuariosDB;
 import Exception.EntityNotFoundException;
 import java.util.Optional;
 

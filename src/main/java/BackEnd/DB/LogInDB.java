@@ -4,9 +4,7 @@
  */
 package BackEnd.DB;
 
-import BackEnd.DB.Usuario.SesionGlobal;
 import BackEnd.DB.Usuario.Usuario;
-import static Model.EncriptarPassword.desencriptar;
 import static Model.EncriptarPassword.encriptar;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,9 +31,11 @@ public class LogInDB {
                     credencialesCorrectas = true;
                     //GUARDAMOS EL CARGO QUE TIENE LA PERSONA QUE ESTA INICIANDO SESION
                     getCargo(user);
+                    getIdPersonal(user);
                 }
             }
         } catch (SQLException e) {
+            System.err.println("Error en el logIn: " + e.getMessage());
             e.printStackTrace();
         }
         return credencialesCorrectas;
@@ -57,5 +57,21 @@ public class LogInDB {
             e.printStackTrace();
         }
         return cargo;
+    }
+    
+    private void getIdPersonal(Usuario user){
+        Connection connection = BDconnectionSingleton.getInstance().getConnection();
+        String sql = "SELECT id_personal FROM usuario WHERE email = ? AND password = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)){
+            ps.setString(1, user.getEmail());
+            ps.setString(2, encriptar(user.getPassword()));
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                SesionGlobal.idPersonal = rs.getString("id_personal");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }
 }
