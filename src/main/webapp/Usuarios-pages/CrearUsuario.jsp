@@ -47,7 +47,7 @@
                         <input type="text" value="Activo" class="form-control mt-2" disabled>
                         <input type="hidden" name="inputActivo" value="Activo">
                         
-                        <input type="submit" class="btn btn-primary btn-block mt-2" style="background-color: green" name="btnLogIn" value="Crear Usuario">
+                        <input type="submit" class="btn btn-primary btn-block mt-2" style="background-color: green" name="btnSignIn" value="Crear Usuario">
                     </div>
                 </div>
             </form>

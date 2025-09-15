@@ -42,7 +42,7 @@
                         <input type="text" name="inputNumTelefono" class="form-control mt-2" placeholder="Número de Telefono" required>
                         <br>
                         <input type="hidden" name="inputActivo" value="Activo">
-                        <input type="submit" class="btn btn-primary btn-block mt-2" style="background-color: green" name="btnLogIn" value="Crear Cuenta">
+                        <input type="submit" class="btn btn-primary btn-block mt-2" style="background-color: green" name="btnSignIn" value="Crear Cuenta">
                     </div>
                 </div>
             </form>

@@ -32,6 +32,18 @@
         <servlet-name>IrListadoConvocatorias</servlet-name>
         <servlet-class>Controller.Convocatorias.IrListadoConvocatorias</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CrearPropuestaServlet</servlet-name>
+        <servlet-class>Controller.Propuestas.CrearPropuestaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IrPropuestasPorConvocatorias</servlet-name>
+        <servlet-class>Controller.Propuestas.IrPropuestasPorConvocatorias</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IrListadoPropuestas</servlet-name>
+        <servlet-class>Controller.Propuestas.IrListadoPropuestas</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>OpcionRequest</servlet-name>
         <url-pattern>/OpcionRequest</url-pattern>
@@ -63,6 +75,18 @@
     <servlet-mapping>
         <servlet-name>IrListadoConvocatorias</servlet-name>
         <url-pattern>/IrListadoConvocatorias</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CrearPropuestaServlet</servlet-name>
+        <url-pattern>/CrearPropuestaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IrPropuestasPorConvocatorias</servlet-name>
+        <url-pattern>/IrPropuestasPorConvocatorias</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IrListadoPropuestas</servlet-name>
+        <url-pattern>/IrListadoPropuestas</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
