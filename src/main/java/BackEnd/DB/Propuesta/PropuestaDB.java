@@ -21,6 +21,8 @@ public class PropuestaDB {
     private final String QUERY_PROPUESTAS_POR_ID_CONVOCATORIA = "SELECT * FROM propuesta WHERE id_convocatoria = ?";
     private final String QUERY_CREAR_PROPUESTA = "INSERT INTO propuesta (id_personal, titulo, tipo_propuesta, descripción, estado, id_convocatoria) VALUES (?,?,?,?,?,?)";
     private final String QUERY_BUSCAR_PROPUESTA_POR_ID = "SELECT COUNT(id_propuesta) FROM propuesta WHERE id_propuesta = ?";
+    private final String QUERY_REVISAR_PROPUESTA = "UPDATE propuesta SET estado = ? WHERE id_propuesta = ?";
+    private final String QUERY_RECHAZAR_PROPUESTA = "UPDATE propuesta SET estado = 'RECHAZADO' WHERE id_propuesta = ?";
     
     private final Connection conn = BDconnectionSingleton.getInstance().getConnection();
     
@@ -66,6 +68,7 @@ public class PropuestaDB {
     
     public boolean existePropuesta(int idPropuesta){
         try (PreparedStatement ps = conn.prepareStatement(QUERY_BUSCAR_PROPUESTA_POR_ID)){
+            ps.setInt(1, idPropuesta);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 int count = rs.getInt(1);
@@ -77,4 +80,16 @@ public class PropuestaDB {
         }
         return false;
     }
+    
+    public void revisarPropuesta(int idPropuesta, String estado){
+        try (PreparedStatement ps = conn.prepareStatement(QUERY_REVISAR_PROPUESTA)){
+            ps.setString(1, estado);
+            ps.setInt(2, idPropuesta);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error al aceptar la propuesta: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
 }

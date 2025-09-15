@@ -4,24 +4,22 @@
  */
 package Controller.Propuestas;
 
-import BackEnd.DB.Convocatoria.Convocatoria;
-import BackEnd.DB.Convocatoria.ConvocatoriaDB;
+import Exception.EntityNotFoundException;
+import Model.Propuesta.RevisionPropuesta;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  *
  * @author jgarcia07
  */
-public class IrPropuestasPorConvocatorias extends HttpServlet {
+public class RevisionPropuestaServlet extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -31,12 +29,19 @@ public class IrPropuestasPorConvocatorias extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ConvocatoriaDB convocatoriaDB = new ConvocatoriaDB();
-        List<Convocatoria> convocatorias = convocatoriaDB.listarConvocatoria();
-        
-        request.setAttribute("convocatorias", convocatorias);
-        
-        request.getRequestDispatcher("/Propuestas-pages/PropuestasPorConvocatorias.jsp").forward(request, response);
+        int idPropuesta = Integer.parseInt(request.getParameter("idPropuesta"));
+        String valor = request.getParameter("valor");
+
+        RevisionPropuesta revisador = new RevisionPropuesta();
+
+        try {
+            revisador.rechazarOaceptar(idPropuesta, valor);
+            response.sendRedirect(request.getContextPath() + "/IrPropuestasPorConvocatorias");
+
+        } catch (EntityNotFoundException ex) {
+            request.setAttribute("error", ex.getMessage());
+            request.getRequestDispatcher("/Propuestas-pages/ListaPropuestas.jsp").forward(request, response);
+        }
     }
 
 }
