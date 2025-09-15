@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ListaConvocatorias
-    Created on : 12 sept 2025, 16:21:04
+    Document   : PropuestasPorConvocatorias
+    Created on : 14 sept 2025, 16:54:17
     Author     : jgarcia07
 --%>
 
@@ -44,7 +44,7 @@
                                     <td>${convocatoria.descripcion}</td>
                                     <td>${convocatoria.estado}</td>
                                     <td>
-                                        <a href="${pageContext.servletContext.contextPath}/CrearPropuestaServlet?idConvocatoria=${convocatoria.idConvocatoria}" class="btn btn-sm btn-warning">Realizar propuesta</a>
+                                        <a href="${pageContext.servletContext.contextPath}/IrListadoPropuestas?idConvocatoria=${convocatoria.idConvocatoria}" class="btn btn-sm btn-warning">Ver Propuestas</a>
                                     </td>
                                 </tr>
                             </c:forEach>

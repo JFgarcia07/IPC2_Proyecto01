@@ -2,11 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.Convocatorias;
+package Controller.Propuestas;
 
 import BackEnd.DB.Convocatoria.Convocatoria;
 import BackEnd.DB.Convocatoria.ConvocatoriaDB;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +18,7 @@ import java.util.List;
  *
  * @author jgarcia07
  */
-public class IrListadoConvocatorias extends HttpServlet {
+public class IrPropuestasPorConvocatorias extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -36,6 +37,7 @@ public class IrListadoConvocatorias extends HttpServlet {
         
         request.setAttribute("convocatorias", convocatorias);
         
-        request.getRequestDispatcher("/Convocatorias-pages/ListaConvocatorias.jsp").forward(request, response);
+        request.getRequestDispatcher("/Propuestas-pages/PropuestasPorConvocatorias.jsp").forward(request, response);
     }
+
 }

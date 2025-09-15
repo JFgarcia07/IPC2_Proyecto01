@@ -31,6 +31,7 @@
                         <br>
                         <label for="opcionesRol">Rol del Usuario:</label>
                         <select id="opcionesRol" name="opcionesRol">
+                            <a href="EditarUsuario.jsp"></a>
                             <option value="1" ${usuario.idRol == '00001' ? 'selected' : ''}>Administrador de Sistema</option>
                             <option value="2" ${usuario.idRol == '00002' ? 'selected' : ''}>Administrador de Congreso</option>
                             <option value="3" ${usuario.idRol == '00003' ? 'selected' : ''}>Usuario Básico</option>

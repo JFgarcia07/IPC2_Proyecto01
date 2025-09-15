@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ListaConvocatorias
-    Created on : 12 sept 2025, 16:21:04
+    Document   : ListaPropuestas
+    Created on : 14 sept 2025, 17:17:54
     Author     : jgarcia07
 --%>
 
@@ -10,41 +10,41 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Convocatorias</title>
+    <title>Propuestas</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 </head>
 <body>
     <jsp:include page="/Includes/NavBar.jsp"/>
-
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Convocatorias</h1>
+        <h1 class="text-center mb-4">Propuestas</h1>
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                <span>Lista de Convocatorias</span>
+                <span>Lista de Propuestas</span>
             </div>
             <div class="card-body">
                     <table class="table table-striped table-hover">
                         <thead class="table-light">
                             <tr>
-                                <th>Id Convocatoria</th>
-                                <th>Fecha Inicio</th>
-                                <th>Fecha Limite</th>
+                                <th>Id Propuesta</th>
+                                <th>Id Personal quien propuso</th>
                                 <th>Titulo</th>
+                                <th>Tipo de Actividad</th>
                                 <th>Descripcion</th>
                                 <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="convocatoria" items="${convocatorias}">
+                            <c:forEach var="propuestas" items="${propuestas}">
                                 <tr>
-                                    <td>${convocatoria.idConvocatoria}</td>
-                                    <td>${convocatoria.fechaInicio}</td>
-                                    <td>${convocatoria.fechaFin}</td>
-                                    <td>${convocatoria.titulo}</td>
-                                    <td>${convocatoria.descripcion}</td>
-                                    <td>${convocatoria.estado}</td>
+                                    <td>${propuestas.idPropuesta}</td>
+                                    <td>${propuestas.idPersonal}</td>
+                                    <td>${propuestas.titulo}</td>
+                                    <td>${propuestas.tipoPropuesta}</td>
+                                    <td>${propuestas.descripcion}</td>
+                                    <td>${propuestas.estado}</td>
                                     <td>
-                                        <a href="${pageContext.servletContext.contextPath}/CrearPropuestaServlet?idConvocatoria=${convocatoria.idConvocatoria}" class="btn btn-sm btn-warning">Realizar propuesta</a>
+                                        <a href="${pageContext.servletContext.contextPath}/CrearPropuestaServlet?idConvocatoria=${convocatoria.idConvocatoria}" class="btn btn-sm btn-success">Aceptar</a>
+                                        <a href="${pageContext.servletContext.contextPath}/CrearPropuestaServlet?idConvocatoria=${convocatoria.idConvocatoria}" class="btn btn-sm btn-danger">Rechazar</a>
                                     </td>
                                 </tr>
                             </c:forEach>

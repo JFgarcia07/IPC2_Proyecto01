@@ -2,16 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Controller.Propuestas;
 
-import BackEnd.DB.Usuario.Usuario;
-import Exception.EntityNotFoundException;
-import Exception.UserDataInvalidException;
-import Model.ConsultaUsuario;
-import Model.EditarUsuario;
+import BackEnd.DB.Propuesta.Propuesta;
+import BackEnd.DB.SesionGlobal;
+import Exception.EntityAlreadyExistsException;
+import Exception.EntityDataInvalidException;
+import Model.Propuesta.CreadorPropuesta;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,9 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author jgarcia07
  */
-@WebServlet(name = "EditarUsuarioServlet", urlPatterns = {"/EditarUsuarioServlet"})
-public class EditarUsuarioServlet extends HttpServlet {
-
+public class CrearPropuestaServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -36,19 +34,13 @@ public class EditarUsuarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        ConsultaUsuario consultaUser = new ConsultaUsuario();
-        String idUsuario = request.getParameter("id");
+        String idConvocatoria = request.getParameter("idConvocatoria");
+        String idPersonal = SesionGlobal.idPersonal;
         
-        try {
-            Usuario usuario = consultaUser.obtenerUsuarioPorId(idUsuario);
-            
-            request.setAttribute("usuario", usuario);
-            request.getRequestDispatcher("/Usuarios-pages/EditarUsuario.jsp").forward(request, response);
-            
-        } catch (EntityNotFoundException ex) {
-            request.setAttribute("error", ex.getMessage());
-        }
+        request.setAttribute("idConvocatoria", idConvocatoria);
+        request.setAttribute("idPersonal", idPersonal);
+        
+        request.getRequestDispatcher("/Propuestas-pages/CrearPropuesta.jsp").forward(request, response);
     }
 
     /**
@@ -62,16 +54,17 @@ public class EditarUsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        EditarUsuario editor = new EditarUsuario();
+        CreadorPropuesta creador = new CreadorPropuesta();
         try {
-            Usuario usuarioActulizado = editor.actualizarUsuario(request);
-            request.setAttribute("usuario", usuarioActulizado);
+            Propuesta propuestaCreada = creador.crearPropuesta(request);
+            request.setAttribute("propuestaCreada", propuestaCreada);
 
-        } catch (UserDataInvalidException | EntityNotFoundException e) {
+            response.sendRedirect(request.getContextPath() + "/IrListadoConvocatorias");
+
+        } catch (EntityDataInvalidException | EntityAlreadyExistsException e) {
             request.setAttribute("error", e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/Propuestas-pages/CrearPropuesta.jsp");
+            dispatcher.forward(request, response);
         }
-        
-        response.sendRedirect(request.getContextPath() + "/IrGestorUsuarios");
     }
-    
 }

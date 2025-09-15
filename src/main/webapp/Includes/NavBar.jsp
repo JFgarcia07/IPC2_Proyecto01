@@ -12,6 +12,11 @@
                 <a href="${pageContext.request.contextPath}/MenuPrincipal.jsp" class="nav-link active" aria-current="page">Menu Principal</a>
             </li> 
             <li class="nav-item"><a href="${pageContext.request.contextPath}/IrListadoConvocatorias" class="nav-link">Lista Convocatorias</a></li> 
+            <c:if test="${sessionScope.idRole != '00003'}">
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/IrPropuestasPorConvocatorias" class="nav-link">Revisar Propuestas</a>
+                </li> 
+            </c:if>
             <c:if test="${sessionScope.idRole == '00001' || sessionScope.idRole == '00002'}">
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/IrGestorConvocatorias" class="nav-link">Gestionar Convocatorias</a>
