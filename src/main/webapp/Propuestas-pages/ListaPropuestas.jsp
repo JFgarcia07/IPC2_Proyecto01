@@ -34,23 +34,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="propuestas" items="${propuestas}">
+                            <c:forEach var="propuesta" items="${propuestas}">
                                 <tr>
-                                    <td>${propuestas.idPropuesta}</td>
-                                    <td>${propuestas.idPersonal}</td>
-                                    <td>${propuestas.titulo}</td>
-                                    <td>${propuestas.tipoPropuesta}</td>
-                                    <td>${propuestas.descripcion}</td>
-                                    <td>${propuestas.estado}</td>
+                                    <td>${propuesta.idPropuesta}</td>
+                                    <td>${propuesta.idPersonal}</td>
+                                    <td>${propuesta.titulo}</td>
+                                    <td>${propuesta.tipoPropuesta}</td>
+                                    <td>${propuesta.descripcion}</td>
+                                    <td>${propuesta.estado}</td>
                                     <td>
-                                        <a href="${pageContext.servletContext.contextPath}/CrearPropuestaServlet?idConvocatoria=${convocatoria.idConvocatoria}" class="btn btn-sm btn-success">Aceptar</a>
-                                        <a href="${pageContext.servletContext.contextPath}/CrearPropuestaServlet?idConvocatoria=${convocatoria.idConvocatoria}" class="btn btn-sm btn-danger">Rechazar</a>
+                                        <a href="${pageContext.servletContext.contextPath}/RevisionPropuestaServlet?idPropuesta=${propuesta.idPropuesta}&valor=ACEPTADO" class="btn btn-sm btn-success">Aceptar</a>
+                                        <a href="${pageContext.servletContext.contextPath}/RevisionPropuestaServlet?idPropuesta=${propuesta.idPropuesta}&valor=RECHAZADO" class="btn btn-sm btn-danger">Rechazar</a>
                                     </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
-                <c:if test="${empty convocatorias}">
+                <c:if test="${empty propuestas}">
                     <p class="text-center text-muted">No hay convocatorias registrados.</p>
                 </c:if>
             </div>
