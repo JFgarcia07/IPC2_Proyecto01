@@ -22,6 +22,7 @@ public class ConvocatoriaDB {
     private final String QUERY_CONVOCATORIAS_TODAS = "SELECT * FROM convocatoria WHERE estado = 1";
     private final String QUERY_CREAR_CONVOCATORIA = "INSERT INTO convocatoria (id_personal, fecha_inicio, fecha_limite, titulo, descripcion, estado) VALUES (?,?,?,?,?,?)";
     private final String QUERY_BUSCAR_CONVOCATORIA_POR_ID = "SELECT COUNT(id_convocatoria) FROM convocatoria WHERE id_convocatoria = ?";
+    private final String QUERY_DESACTIVAR_CONVOCATORIA = "UPDATE convocatoria SET estado = 0 WHERE id_convocatoria = ?";
     
     public List<Convocatoria> listarConvocatoria(){
         List<Convocatoria> convocatoriasList = new ArrayList<>();
@@ -79,4 +80,16 @@ public class ConvocatoriaDB {
         }
         return false;
     }
+    
+    public void desactivarConvocatoria(int idConvocatoria){
+        Connection conn = BDconnectionSingleton.getInstance().getConnection();
+        try (PreparedStatement ps = conn.prepareStatement(QUERY_DESACTIVAR_CONVOCATORIA)){
+            ps.setInt(1, idConvocatoria);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error al desactivar la convocatoria: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }
+

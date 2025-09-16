@@ -114,4 +114,9 @@ public class Usuario {
                 && StringUtils.isNotBlank(password) && StringUtils.isNotBlank(nombreUsuario) && StringUtils.isNotBlank(organizacionProcedencia) &&
                 StringUtils.isNotBlank(numTelefono);
     }
+    
+    public boolean perfilValido() {
+        return StringUtils.isNotBlank(email) && StringUtils.isNotBlank(nombreUsuario) && StringUtils.isNotBlank(organizacionProcedencia)
+                && StringUtils.isNotBlank(numTelefono) && StringUtils.isNotBlank(idPersonal);
+    }
 }

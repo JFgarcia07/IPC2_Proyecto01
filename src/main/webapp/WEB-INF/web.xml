@@ -48,6 +48,14 @@
         <servlet-name>RevisionPropuestaServlet</servlet-name>
         <servlet-class>Controller.Propuestas.RevisionPropuestaServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>IrPerfilServlet</servlet-name>
+        <servlet-class>Controller.IrPerfilServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditarPerfilServlet</servlet-name>
+        <servlet-class>Controller.EditarPerfilServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>OpcionRequest</servlet-name>
         <url-pattern>/OpcionRequest</url-pattern>
@@ -95,6 +103,14 @@
     <servlet-mapping>
         <servlet-name>RevisionPropuestaServlet</servlet-name>
         <url-pattern>/RevisionPropuestaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IrPerfilServlet</servlet-name>
+        <url-pattern>/IrPerfilServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarPerfilServlet</servlet-name>
+        <url-pattern>/EditarPerfilServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
