@@ -2,27 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.Convocatorias;
+package Controller;
 
-import BackEnd.DB.Convocatoria.Convocatoria;
-import BackEnd.DB.Convocatoria.ConvocatoriaDB;
-import Model.Convocatorias.ListadorConvocatorias;
+import BackEnd.DB.Usuario.Usuario;
+import Model.PerfilUsuario;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  *
  * @author jgarcia07
  */
-public class IrListadoConvocatorias extends HttpServlet {
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+public class IrPerfilServlet extends HttpServlet {
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -32,10 +28,10 @@ public class IrListadoConvocatorias extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ListadorConvocatorias listador = new ListadorConvocatorias();
-        List<Convocatoria> convocatorias = listador.listarConvocatorias();
+        PerfilUsuario perfilUsuario = new PerfilUsuario();
+        Usuario perfil = perfilUsuario.llenarDatosPerfil();
         
-        request.setAttribute("convocatorias", convocatorias);
-        request.getRequestDispatcher("/Convocatorias-pages/ListaConvocatorias.jsp").forward(request, response);
+        request.setAttribute("perfil", perfil);
+        request.getRequestDispatcher("/Usuarios-pages/Perfil.jsp").forward(request, response);
     }
 }

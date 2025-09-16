@@ -54,7 +54,7 @@ public class EditarUsuario {
             usuario.setNumTelefono(numTelefono);
             usuario.setActivo(estado);
             
-             if (!usuario.esValido()) {
+            if (!usuario.esValido()) {
                 throw new UserDataInvalidException("Error en los datos enviados");
             }
             

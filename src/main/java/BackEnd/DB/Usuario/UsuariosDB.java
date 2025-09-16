@@ -26,6 +26,7 @@ public class UsuariosDB {
     private final String QUERY_CREAR_USUARIO = "INSERT INTO usuario (id_personal, id_rol, email, nombre_usuario, password, oranizacion_procedencia, num_telefono, activo, cartera_digital) VALUES (?,?,?,?,?,?,?,?,?)";
     private final String QUERY_ID_ROL = "SELECT (id_rol) FROM rol WHERE nombre_rol = ?";
     private final String QUERY_EDITAR_USUARIO = "UPDATE usuario SET id_rol = ?, email = ?, password = ?, nombre_usuario = ?, oranizacion_procedencia = ?, num_telefono = ?, activo = ? WHERE id_personal = ?";
+    private final String QUERY_EDITAR_PERFIL = "UPDATE usuario SET email = ?, nombre_usuario = ?, oranizacion_procedencia = ?, num_telefono = ? WHERE id_personal = ?";
     private final String QUERY_DESACTIVAR_USUARIO = "UPDATE usuario SET activo = ? WHERE id_personal = ?";
     
     public List<Usuario> listaUsuarios() {
@@ -159,6 +160,21 @@ public class UsuariosDB {
             ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error al editar usuario: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    public void editarPerfil(Usuario perfil){
+        Connection conn = BDconnectionSingleton.getInstance().getConnection();
+        try (PreparedStatement ps = conn.prepareStatement(QUERY_EDITAR_PERFIL)){
+            ps.setString(1, perfil.getEmail());
+            ps.setString(2, perfil.getNombreUsuario());
+            ps.setString(3, perfil.getOrganizacionProcedencia());
+            ps.setString(4, perfil.getNumTelefono());
+            ps.setString(5, perfil.getIdPersonal());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error al editar perfil: " + e.getMessage());
             e.printStackTrace();
         }
     }
