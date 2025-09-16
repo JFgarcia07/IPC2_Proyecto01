@@ -28,6 +28,8 @@ public class UsuariosDB {
     private final String QUERY_EDITAR_USUARIO = "UPDATE usuario SET id_rol = ?, email = ?, password = ?, nombre_usuario = ?, oranizacion_procedencia = ?, num_telefono = ?, activo = ? WHERE id_personal = ?";
     private final String QUERY_EDITAR_PERFIL = "UPDATE usuario SET email = ?, nombre_usuario = ?, oranizacion_procedencia = ?, num_telefono = ? WHERE id_personal = ?";
     private final String QUERY_DESACTIVAR_USUARIO = "UPDATE usuario SET activo = ? WHERE id_personal = ?";
+    private final String QUERY_RECARGAR_CARTERA_DIGITAL = "UPDATE usuario SET cartera_digital = ? WHERE id_personal = ?";
+    private final String QUERY_OBTENER_CARTERA_DIGITAL = "SELECT cartera_digital FROM usuario WHERE id_personal = ?";
     
     public List<Usuario> listaUsuarios() {
         List<Usuario> usuarios = new ArrayList<>();
@@ -134,7 +136,7 @@ public class UsuariosDB {
                 user.setOrganizacionProcedencia(rs.getString("oranizacion_procedencia"));
                 user.setNumTelefono(rs.getString("num_telefono"));
                 user.setActivo(rs.getBoolean("activo"));
-
+                user.setCartera(rs.getDouble("cartera_digital"));
                 return Optional.of(user);
             }
 
@@ -187,6 +189,35 @@ public class UsuariosDB {
             ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error al desactivar usuario: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    
+    public double obtnerSaldoCartera(String idPersonal){
+        Connection conn = BDconnectionSingleton.getInstance().getConnection();
+        double saldoActual = 0;
+        try (PreparedStatement ps = conn.prepareStatement(QUERY_OBTENER_CARTERA_DIGITAL)){
+            ps.setString(1, idPersonal);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                saldoActual = rs.getDouble("cartera_digital");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener la cartera digital del usuario: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return saldoActual;
+    }
+    
+    public void recargarCarteraDigital(Usuario usuario){
+        Connection conn = BDconnectionSingleton.getInstance().getConnection();
+        try (PreparedStatement ps = conn.prepareStatement(QUERY_RECARGAR_CARTERA_DIGITAL)){
+            ps.setDouble(1, usuario.getCartera());
+            ps.setString(2, usuario.getIdPersonal());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error al recargar la cartera del usuario: " + e.getMessage());
             e.printStackTrace();
         }
     }

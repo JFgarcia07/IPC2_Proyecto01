@@ -56,6 +56,10 @@
         <servlet-name>EditarPerfilServlet</servlet-name>
         <servlet-class>Controller.EditarPerfilServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RecargarCarteraServlet</servlet-name>
+        <servlet-class>Controller.RecargarCarteraServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>OpcionRequest</servlet-name>
         <url-pattern>/OpcionRequest</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>EditarPerfilServlet</servlet-name>
         <url-pattern>/EditarPerfilServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RecargarCarteraServlet</servlet-name>
+        <url-pattern>/RecargarCarteraServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
