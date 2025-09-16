@@ -23,6 +23,7 @@
                     <div class="card-body text-center">
                         <h3 class="card-title">${perfil.nombreUsuario}</h3>
                         <a href="${pageContext.request.contextPath}/EditarPerfilServlet" class="btn btn-sm btn-outline-primary">Editar Perfil</a>
+                        <a href="${pageContext.request.contextPath}/RecargarCarteraServlet" class="btn btn-sm btn-outline-primary">Recargar Cartera Digital</a>
                     </div>
                 </div>
             </div>

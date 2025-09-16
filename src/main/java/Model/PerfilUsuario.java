@@ -25,7 +25,7 @@ public class PerfilUsuario {
         return perfil;
     }
     
-    public Usuario editarPerfil(HttpServletRequest request) throws UserDataInvalidException, EntityNotFoundException{
+    public Usuario editarPerfil(HttpServletRequest request) throws UserDataInvalidException, EntityNotFoundException {
         UsuariosDB userDB = new UsuariosDB();
         Usuario perfilActualizado = extraer(request);
         
