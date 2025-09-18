@@ -15,7 +15,11 @@
 </head>
 <body>
     <jsp:include page="/Includes/NavBar.jsp"/>
-
+    <c:if test="${not empty error}">
+        <div class="alert alert-danger" role="alert">
+            ${error}
+        </div>
+    </c:if>
     <div class="container mt-5">
         <h1 class="text-center mb-4">Convocatorias</h1>
         <div class="card shadow-sm">

@@ -8,19 +8,22 @@ import BackEnd.DB.Convocatoria.Convocatoria;
 import BackEnd.DB.Convocatoria.ConvocatoriaDB;
 import Exception.EntityAlreadyExistsException;
 import Exception.EntityDataInvalidException;
+import Exception.UnauthorizedCallCreationException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  *
  * @author jgarcia07
  */
 public class CreadorConvocatorias {
+    
     private final ConvocatoriaDB convocatoriaDB = new ConvocatoriaDB();
     
     public Convocatoria crearConvocatoria(HttpServletRequest request) throws EntityDataInvalidException,
-            EntityAlreadyExistsException{
+            EntityAlreadyExistsException, UnauthorizedCallCreationException{
         
         Convocatoria convocatoria = extraer(request);
         
@@ -33,7 +36,8 @@ public class CreadorConvocatorias {
         return convocatoria;
     }
     
-    private Convocatoria extraer(HttpServletRequest request) throws EntityDataInvalidException {
+    private Convocatoria extraer(HttpServletRequest request) throws EntityDataInvalidException,
+            UnauthorizedCallCreationException {
         try {
             String idPersonal = request.getParameter("inputIdPersonal");
             Date fechaInicio = transformarAdate(request.getParameter("fechaInicio"));
@@ -41,15 +45,20 @@ public class CreadorConvocatorias {
             String titulo = request.getParameter("inputTitulo");
             String descripcion = request.getParameter("descripcion");
             boolean estado = getBoolean(request.getParameter("inputEstado"));
+            String idCongreso = request.getParameter("inputIdCongreso");
             
-            Convocatoria convocatoria = new Convocatoria(idPersonal, fechaInicio, fechaFinal, titulo, descripcion, estado);
+            Convocatoria convocatoria = new Convocatoria(idPersonal, fechaInicio, fechaFinal, titulo, descripcion, estado, idCongreso);
             
             if (!convocatoria.esValido()) {
-                throw new EntityDataInvalidException("Error en los datos enviados");
+                throw new EntityDataInvalidException("Error en los datos enviados, debe de llenar todos los datos");
             }
             
             if(!validarDate(fechaInicio, fechaFinal)){
                 throw new EntityDataInvalidException("La fecha de finalización debe ser posterior a la fecha de inicio.");
+            }
+            
+            if(!validarIdCongreso(convocatoria.getIdPersonal(), convocatoria.getIdCongreso())){
+                throw new UnauthorizedCallCreationException("No puede crear una convocatoria para un congreso donde no es el administrador");
             }
             
             return convocatoria;
@@ -73,6 +82,16 @@ public class CreadorConvocatorias {
             e.printStackTrace();
             return null;
         }
+    }
+    
+    private boolean validarIdCongreso(String idPersonal, String idCongreso){
+        List<String> idCongresoSQL = convocatoriaDB.obtenerCongresoPorIdPersonal(idPersonal);
+        for (String id : idCongresoSQL) {
+            if(id.equals(idCongreso)){
+                return true;
+            }
+        }
+        return false;
     }
     
     private boolean validarDate(Date fechaInicio, Date fechaFin){

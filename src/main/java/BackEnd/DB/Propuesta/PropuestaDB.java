@@ -22,7 +22,7 @@ public class PropuestaDB {
     private final String QUERY_CREAR_PROPUESTA = "INSERT INTO propuesta (id_personal, titulo, tipo_propuesta, descripción, estado, id_convocatoria) VALUES (?,?,?,?,?,?)";
     private final String QUERY_BUSCAR_PROPUESTA_POR_ID = "SELECT COUNT(id_propuesta) FROM propuesta WHERE id_propuesta = ?";
     private final String QUERY_REVISAR_PROPUESTA = "UPDATE propuesta SET estado = ? WHERE id_propuesta = ?";
-    private final String QUERY_RECHAZAR_PROPUESTA = "UPDATE propuesta SET estado = 'RECHAZADO' WHERE id_propuesta = ?";
+    
     
     private final Connection conn = BDconnectionSingleton.getInstance().getConnection();
     
@@ -80,6 +80,7 @@ public class PropuestaDB {
         }
         return false;
     }
+    
     
     public void revisarPropuesta(int idPropuesta, String estado){
         try (PreparedStatement ps = conn.prepareStatement(QUERY_REVISAR_PROPUESTA)){
