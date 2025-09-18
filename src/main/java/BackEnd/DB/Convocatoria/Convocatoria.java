@@ -19,14 +19,16 @@ public class Convocatoria {
     private String titulo;
     private String descripcion;
     private boolean estado;
+    private String idCongreso;
 
-    public Convocatoria(String idPersonal, Date fechaInicio, Date fechaFin, String titulo, String descripcion, boolean estado) {
+    public Convocatoria(String idPersonal, Date fechaInicio, Date fechaFin, String titulo, String descripcion, boolean estado, String idCongreso) {
         this.idPersonal = idPersonal;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.estado = estado;
+        this.idCongreso = idCongreso;
     }
 
     public String getIdConvocatoria() {
@@ -84,10 +86,23 @@ public class Convocatoria {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    
-    public boolean esValido(){
-        return StringUtils.isNotBlank(idPersonal) && 
-               StringUtils.isNotBlank(titulo) && StringUtils.isNotBlank(descripcion);
+
+    public String getIdCongreso() {
+        return idCongreso;
     }
+
+    public void setIdCongreso(String idCongreso) {
+        this.idCongreso = idCongreso;
+    }
+    
+    public boolean esValido() {
+        return StringUtils.isNotBlank(idPersonal)
+                && fechaInicio != null
+                && fechaFin != null
+                && StringUtils.isNotBlank(titulo)
+                && StringUtils.isNotBlank(descripcion)
+                && StringUtils.isNotBlank(idCongreso);
+    }
+
     
 }

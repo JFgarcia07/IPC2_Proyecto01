@@ -15,6 +15,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Date;
 
 /**
  *
@@ -34,8 +35,17 @@ public class CrearPropuestaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CreadorPropuesta creador = new CreadorPropuesta();
+        
         String idConvocatoria = request.getParameter("idConvocatoria");
         String idPersonal = SesionGlobal.idPersonal;
+        
+        if(creador.validarFechaInicio(idConvocatoria)){
+            request.setAttribute("error", "La convocatoria aun no está disponible");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/IrListadoConvocatorias");
+            dispatcher.forward(request, response);
+            return; 
+        }
         
         request.setAttribute("idConvocatoria", idConvocatoria);
         request.setAttribute("idPersonal", idPersonal);

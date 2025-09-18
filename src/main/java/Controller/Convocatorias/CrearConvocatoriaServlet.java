@@ -7,6 +7,7 @@ package Controller.Convocatorias;
 import BackEnd.DB.Convocatoria.Convocatoria;
 import Exception.EntityAlreadyExistsException;
 import Exception.EntityDataInvalidException;
+import Exception.UnauthorizedCallCreationException;
 import Model.Convocatorias.CreadorConvocatorias;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class CrearConvocatoriaServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/MenuPrincipal.jsp");
             dispatcher.forward(request, response);
 
-        } catch (EntityDataInvalidException | EntityAlreadyExistsException e) {
+        } catch (EntityDataInvalidException | EntityAlreadyExistsException | UnauthorizedCallCreationException e) {
             if (e.getMessage() != null && !e.getMessage().isBlank()) {
                 request.setAttribute("error", e.getMessage());
             }

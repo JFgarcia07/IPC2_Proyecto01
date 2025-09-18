@@ -23,17 +23,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </c:if>
-            <div class="mb-3">
-                <a href="${pageContext.request.contextPath}/MenuPrincipal.jsp" class="btn btn-secondary" style="background-color: #005cbf">
-                    <- Regresar
-                </a>
-            </div>
+
             <form method="POST" action="${pageContext.request.contextPath}/CrearConvocatoriaServlet">
                 <div class="card" style="width: 1000px">
                     <div class="card-body">
                         <h3>Crear Convocatoria</h3>
                         <label for="fecha">Creador de la convocatoria:</label>
                         <input type="text" name="inputIdPersonal" class="form-control mt-2" value="${idPersonal}" placeholder="Id Personal" required readonly>
+                        <br>
+                        <input type="text" name="inputIdCongreso" class="form-control mt-2" placeholder="Id del Congreso" required>
                         <br>
                         <label for="fecha">Fecha de lanzamiento de la convocatoria:</label>
                         <input type="date" id="fechaInicio" name="fechaInicio" value="2025-01-01">

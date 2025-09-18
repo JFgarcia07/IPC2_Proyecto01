@@ -4,11 +4,16 @@
  */
 package Model.Propuesta;
 
+import BackEnd.DB.Convocatoria.ConvocatoriaDB;
 import BackEnd.DB.Propuesta.Propuesta;
 import BackEnd.DB.Propuesta.PropuestaDB;
 import Exception.EntityAlreadyExistsException;
 import Exception.EntityDataInvalidException;
 import jakarta.servlet.http.HttpServletRequest;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 /**
  *
@@ -16,6 +21,7 @@ import jakarta.servlet.http.HttpServletRequest;
  */
 public class CreadorPropuesta {
     private final PropuestaDB propuestaDB = new PropuestaDB();
+    private final ConvocatoriaDB convocatoriaBD = new ConvocatoriaDB();
     
     public Propuesta crearPropuesta(HttpServletRequest request) throws EntityDataInvalidException,
         EntityAlreadyExistsException {
@@ -50,6 +56,15 @@ public class CreadorPropuesta {
         } catch (IllegalArgumentException | NullPointerException e) {
             throw new EntityDataInvalidException("Error en los datos enviados");
         }
+    }
+    
+    public boolean validarFechaInicio(String idCongreso){
+        LocalDate fechaActual = LocalDate.now();
+        Date fechaHoy = Date.valueOf(fechaActual);
+        
+        Date fechaSQL = convocatoriaBD.obtenerFechaIncio(idCongreso);
+        
+        return fechaHoy.before(fechaSQL);
     }
     
     private String obtenerTipoPropuesta(String valor){

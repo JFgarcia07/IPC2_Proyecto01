@@ -20,7 +20,7 @@
             </c:if>
             <c:if test="${sessionScope.idRole == '00001' || sessionScope.idRole == '00002'}">
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/IrGestorConvocatorias" class="nav-link">Gestionar Convocatorias</a>
+                    <a href="${pageContext.request.contextPath}/IrGestorConvocatorias" class="nav-link">Crear Convocatorias</a>
                 </li> 
             </c:if>
             <c:if test="${sessionScope.idRole == '00001' || sessionScope.idRole == '00002'}">
