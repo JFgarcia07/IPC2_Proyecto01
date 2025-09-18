@@ -37,6 +37,8 @@ public class LogInRequest extends HttpServlet {
             if (logIn.validarCredenciales(request)) {
                 HttpSession session = request.getSession();
                 session.setAttribute("idRole", SesionGlobal.idRol);
+                session.setAttribute("idPersonal", SesionGlobal.idPersonal);
+                
                 request.getRequestDispatcher("/MenuPrincipal.jsp").forward(request, response);
             }
              else {

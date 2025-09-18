@@ -67,7 +67,7 @@ public class UsuariosDB {
                 return count > 0;
             }
         } catch (SQLException e) {
-            System.err.println("Error al crear usuario: " + e.getMessage());
+            System.err.println("Error al busacar el usuario: " + e.getMessage());
             e.printStackTrace();
         }
         return false;
@@ -140,7 +140,7 @@ public class UsuariosDB {
                 return Optional.of(user);
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println("Error al obtener usuario: " + e.getMessage());
             e.printStackTrace();
         }
@@ -192,7 +192,6 @@ public class UsuariosDB {
             e.printStackTrace();
         }
     }
-    
     
     public double obtnerSaldoCartera(String idPersonal){
         Connection conn = BDconnectionSingleton.getInstance().getConnection();

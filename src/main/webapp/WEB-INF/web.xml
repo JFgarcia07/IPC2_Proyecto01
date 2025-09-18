@@ -60,6 +60,18 @@
         <servlet-name>RecargarCarteraServlet</servlet-name>
         <servlet-class>Controller.RecargarCarteraServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>IrListadoCongresos</servlet-name>
+        <servlet-class>Controller.Congreso.IrListadoCongresos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CrearCongresoServlet</servlet-name>
+        <servlet-class>Controller.Congreso.CrearCongresoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IrListadoCongresosAdmin</servlet-name>
+        <servlet-class>Controller.Congreso.IrGestorCongresos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>OpcionRequest</servlet-name>
         <url-pattern>/OpcionRequest</url-pattern>
@@ -119,6 +131,18 @@
     <servlet-mapping>
         <servlet-name>RecargarCarteraServlet</servlet-name>
         <url-pattern>/RecargarCarteraServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IrListadoCongresos</servlet-name>
+        <url-pattern>/IrListadoCongresos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CrearCongresoServlet</servlet-name>
+        <url-pattern>/CrearCongresoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IrListadoCongresosAdmin</servlet-name>
+        <url-pattern>/IrListadoCongresosAdmin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
