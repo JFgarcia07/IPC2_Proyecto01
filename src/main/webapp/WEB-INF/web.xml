@@ -72,6 +72,22 @@
         <servlet-name>IrListadoCongresosAdmin</servlet-name>
         <servlet-class>Controller.Congreso.IrGestorCongresos</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>IrListadoInstalaciones</servlet-name>
+        <servlet-class>Controller.Instalacion.IrListadoInstalaciones</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CrearInstalacionServlet</servlet-name>
+        <servlet-class>Controller.Instalacion.RegistrarInstalacionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditarInstalacionServlet</servlet-name>
+        <servlet-class>Controller.Instalacion.EditarInstalacionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarInstalacion</servlet-name>
+        <servlet-class>Controller.Instalacion.EliminarInstalacionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>OpcionRequest</servlet-name>
         <url-pattern>/OpcionRequest</url-pattern>
@@ -143,6 +159,22 @@
     <servlet-mapping>
         <servlet-name>IrListadoCongresosAdmin</servlet-name>
         <url-pattern>/IrListadoCongresosAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IrListadoInstalaciones</servlet-name>
+        <url-pattern>/IrListadoInstalaciones</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CrearInstalacionServlet</servlet-name>
+        <url-pattern>/CrearInstalacionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarInstalacionServlet</servlet-name>
+        <url-pattern>/EditarInstalacionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarInstalacion</servlet-name>
+        <url-pattern>/EliminarInstalacion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

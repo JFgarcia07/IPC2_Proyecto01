@@ -24,7 +24,7 @@
                 </div>
             </c:if>
 
-            <form method="POST" action="${pageContext.request.contextPath}/CrearConvocatoriaServlet">
+            <form method="POST" action="${pageContext.request.contextPath}/RegistrarInstalacionesServlet">
                 <div class="card" style="width: 1000px">
                     <div class="card-body">
                         <h3>Crear Convocatoria</h3>

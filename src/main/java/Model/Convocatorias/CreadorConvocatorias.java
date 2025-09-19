@@ -23,19 +23,19 @@ public class CreadorConvocatorias {
     private final ConvocatoriaDB convocatoriaDB = new ConvocatoriaDB();
     
     public Convocatoria crearConvocatoria(HttpServletRequest request) throws EntityDataInvalidException,
-            EntityAlreadyExistsException, UnauthorizedCallCreationException{
-        
+            EntityAlreadyExistsException, UnauthorizedCallCreationException {
+
         Convocatoria convocatoria = extraer(request);
-        
-        if(convocatoriaDB.existeConvocatoria(convocatoria.getIdConvocatoria())){
+
+        if (convocatoriaDB.existeConvocatoria(convocatoria.getIdConvocatoria())) {
             throw new EntityAlreadyExistsException(String.format("La convocatoria ya existe en el sistema", convocatoria.getIdConvocatoria()));
         }
-        
+
         convocatoriaDB.crearConvocatoriaBD(convocatoria);
-        
+
         return convocatoria;
     }
-    
+
     private Convocatoria extraer(HttpServletRequest request) throws EntityDataInvalidException,
             UnauthorizedCallCreationException {
         try {

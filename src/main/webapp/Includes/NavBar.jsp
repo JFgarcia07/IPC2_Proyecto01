@@ -28,6 +28,11 @@
                     <a href="${pageContext.request.contextPath}/IrGestorCongresos?idPersonal=${sessionScope.idPersonal}" class="nav-link">Gestor de Congresos</a>
                 </li>
             </c:if>
+            <c:if test="${sessionScope.idRole == '00001' || sessionScope.idRole == '00002'}">
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/IrListadoInstalaciones" class="nav-link">Gestor Instalaciones</a>
+                </li>
+            </c:if>
             <c:if test="${sessionScope.idRole == '00001'}">
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/IrGestorUsuarios" class="nav-link">Gestor de Usuarios</a>
